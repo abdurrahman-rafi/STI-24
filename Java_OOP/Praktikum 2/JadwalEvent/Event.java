@@ -19,8 +19,8 @@ public class Event {
     //  - tingkatkan totalEvents
     public Event(){
         title = "Untitled";
-        start = new Waktu(0);
-        end = new Waktu(0);
+        start = new Waktu();
+        end = new Waktu();
         totalEvents++;
     }
 

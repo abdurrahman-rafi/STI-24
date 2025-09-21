@@ -16,17 +16,12 @@ public class Waktu {
     // - batasi jam hanya 0..23
     // - batasi menit hanya 0..59
     public Waktu(int hour, int minute) {
-        if(hour <= 23 && hour >= 0){
-            this.hour = hour;
-        }else{
-            this.hour = 0;
-        }
-
-        if(minute <= 59 && minute >=0){
-            this.minute = minute;
-        }else{
-            this.minute = 0;
-        }
+        if (hour < 0) hour = 0;
+        if (hour > 23) hour = 23;
+        if (minute < 0) minute = 0;
+        if (minute > 59) minute = 59;
+        this.hour = hour;
+        this.minute = minute;
         // gunakan this.hour dan this.minute
     }
 
@@ -39,13 +34,15 @@ public class Waktu {
         // }
         // minute = totalMinutes % 60;
         // // misalnya 150 -> 02:30
-        totalMinutes = totalMinutes % (24 * 60); // handle negatif
-        if (totalMinutes < 0) {
-            totalMinutes += 24 * 60;
-        }
+        // totalMinutes = totalMinutes % (24 * 60); // handle negatif
+        // if (totalMinutes < 0) {
+        //     totalMinutes += 24 * 60;
+        // }
         
-        hour = totalMinutes / 60;
-        minute = totalMinutes % 60;
+        // hour = totalMinutes / 60;
+        // minute = totalMinutes % 60;
+        this.hour = (totalMinutes / 60) % 24;
+        this.minute = totalMinutes % 60;
     }
 
     // TODO: Buatlah Getter getHour() dan getMinute()
