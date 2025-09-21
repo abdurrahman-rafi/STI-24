@@ -47,7 +47,10 @@ public class Pasien {
                 check = false;
         }
 
-        if(!check || !dokter.tambahPasien()){
+        if(!check){
+            return false;
+        }
+        if(!dokter.tambahPasien()){
             return false;
         }
 
@@ -57,7 +60,7 @@ public class Pasien {
             case "Sedang": multiplier = 1.5; break;
             case "Ringan": multiplier = 1.0; break;
         }
-        biaya *= multiplier * dokter.getTarif();
+        biaya = multiplier * dokter.getTarif();
         // TODO 2b: Hitung biaya berdasarkan tingkatUrgent
         // Multipliers: "Ringan" = 1.0, "Sedang" = 1.5, "Berat" = 2.0
         // Formula: biaya = dokter.getTarif() * multiplier
@@ -68,12 +71,13 @@ public class Pasien {
         dokterPemeriksa = dokter;
 
         // Return true jika berhasil
-        return check;
+        return true;
     }
 
     // TODO 3: Buat method resetAssignment()
     // Reset dokterPemeriksa ke null dan biaya ke 0
     public void resetAssignment() {
+        
         dokterPemeriksa = null;
         biaya = 0.0;
     }

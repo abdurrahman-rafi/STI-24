@@ -36,14 +36,16 @@ public class RumahSakit {
         // Untuk setiap dokter, periksa apakah mereka bertugas dan punya ruang (< 3 pasien)
         for(Dokter d : daftarDokter){
             if(d.isSedangBertugas() && d.getJumlahPasien() < Dokter.getMaxPasien() ){
-                if(pasien.assignDokter(d) && d.getJumlahPasien() < minPasien){
-                    dokterTerpilih = d;
-                    minPasien = dokterTerpilih.getJumlahPasien();
+                if (pasien.assignDokter(d)) {
+                    if (d.getJumlahPasien() < minPasien) {
+                        dokterTerpilih = d;
+                        minPasien = d.getJumlahPasien();
+                    }
+                    //undo temp
                     d.decrementPasien();
                     pasien.resetAssignment();
                 }
-            }
-            
+             }
         }
         // TODO 3c: Untuk dokter yang cocok, tes apakah mereka bisa menangani pasien ini
         // Gunakan pasien.assignDokter(dokter) untuk tes kompatibilitas

@@ -37,6 +37,6 @@ public class DataPribadi {
     // Contoh: "Dr. Budi (35 tahun)"
     @Override
     public String toString() {
-        return String.format("Dr. %s (%d tahun)", nama, umur);
+        return String.format("%s (%d tahun)", nama, umur);
     }
 }
