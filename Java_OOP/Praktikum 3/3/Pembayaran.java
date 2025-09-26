@@ -4,6 +4,10 @@ public abstract class Pembayaran{
 
     public abstract double hitungTotal();
 
+    public Pembayaran(String namaPelanggan, double jumlah){
+        this.namaPelanggan = namaPelanggan;
+        this.jumlah = jumlah;
+    }
     public String getNamaPelanggan(){
         return namaPelanggan;
     }
