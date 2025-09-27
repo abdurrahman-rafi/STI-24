@@ -5,7 +5,7 @@ public abstract class Animal implements IAnimal {
     private String habitat;
     protected String sound;
 
-    enum AnimalType {
+    public enum AnimalType {
         MAMMAL,
         AVES,
         REPTILE
@@ -108,6 +108,7 @@ public abstract class Animal implements IAnimal {
      * 
      * @return suara hewan
      */
+    @Override
     public String sound() {
         return sound;
         // TODO: lengkapi method ini

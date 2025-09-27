@@ -26,6 +26,8 @@ public class Aves extends Animal {
         // TODO: lengkapi method ini
     }
 
+    public boolean isCanFly() { return canFly; }
+
     /**
      * Mengembalikan sound hewan.
      * 
