@@ -1,0 +1,16 @@
+Common mistakes:
+1. Salah menginisialisasi array
+Array p = new ArrayList<>
+
+2. Tidak menambah totalPrice ketika addProduct
+
+3. Tidak memakai fungsi array.clear() untuk clear cart
+
+4. Lupa menambah @Override
+
+5. Logic pengecekan saldo saat checkout pada User terbalik.
+
+6. tidak memakai isEmpty
+
+7. Logika overlap tidak memasukkan semua case:
+    end sebelum

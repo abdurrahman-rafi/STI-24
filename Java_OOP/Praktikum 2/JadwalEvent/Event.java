@@ -104,7 +104,7 @@ public class Event {
         int ae = Waktu.toMinutes(a.getEnd());
         int bs = Waktu.toMinutes(b.getStart());
         int be = Waktu.toMinutes(b.getEnd());
-
+        // as bs be ae
         return as < be && bs < ae;
     }
     //  - return true jika rentang waktu keduanya beririsan
