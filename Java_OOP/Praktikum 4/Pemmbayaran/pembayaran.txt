@@ -1,0 +1,39 @@
+Kumpulkan dalam Pembayaran.zip
+
+Bayangkan anda sedang merencanakan suatu payment gateway. Jika sebelumnya kalian telah mengimplementasikan cashier, kali ini kita akan membuatnya dengan lebih advance dan clean. Interface dapat membuat kode menjadi lebih clean dan scalable. Alih alih langsung override dari Pembayaran, kita akan buat interface (kontrak) bagi kelas yang akan mengimplementasikannya. Selain itu, Interface juga memberikan kemudahan kepada kita untuk membuat implementasi kelas dari multiple interface (kontrak).
+
+Untuk memahaminya buatlah:
+1. Kelas Pembayaran
+- Memiliki atribut privat balance (int)
+- Memiliki setter dan getter (setBalance()-->int, getBalance()-->int)
+
+2. Interface Payable
+- Memiliki method void pay(int amount);
+
+3. Interface Refundable
+- Memiliki method void refund(int amount);
+
+4. Kelas EWallet
+- Kelas ini mengimplementasikan Payable dan Refundable
+- Kelas ini merupakan turunan dari kelas Pembayaran
+
+5. Kelas COD
+- Kelas ini mengimplementasikan Payable
+- Kelas ini merupakan turunan dari kelas Pembayaran
+
+Signature method:
+1. void pay(int amount)
+- Jika amount valid (lebih besar dari nol dan balance nya cukup), keluarkan output ("[<Tipe Pembayaran>] Paid: {amount}. Remaining balance: {balance}")
+- Jika tidak valid, keluarkan output ("[<Tipe Pembayaran>] Payment failed. Insufficient balance or invalid amount.")
+
+2. void refund(int amount)
+- Jika amount valid (lebih besar dari nol), keluarkan output ("[<Tipe Pembayaran>] Refunded: {amount}. New balance: {balance}")
+- Jika tidak valid, ("[<Tipe Pembayaran>] Refund failed. Invalid amount.")
+
+Sekarang, tiap kali anda ingin menambah metode pembayaran, tinggal membuat kelas baru dan memilih ingin bisa payable dan refundable, atau hanya salah satu saja. Dengan design seperti ini, code anda menjadi lebih loosly coupling dan bisa mengimplementasikan lebih dari satu interface (kontrak).
+
+
+Note:
+- <Tipe Pembayaran> -> Sesuaikan dengan tipe pembayaran ("COD" atau "EWallet")
+- Jangan lupa endline setiap statement
+- Kumpulkan file Pembayaran.java Payable.java, Refundable.java, EWallet.java, COD.java dalam Pembayaran.zip
