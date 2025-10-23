@@ -96,10 +96,10 @@ public class UserSubscriber implements Subscriber{
             System.out.println(String.format("Pengguna %s menambahkan kategori '%s' untuk agensi %s dengan metode %s.", 
             getName(), category, agencyName, s.getDeliveryMethod()));
         } 
-        // else {
-        //     System.out.println(String.format("Pengguna %s tidak dapat menambahkan kategori '%s' ke agensi %s.", 
-        //     getName(), category, agencyName));
-        // }
+        else {
+            System.out.println(String.format("Pengguna %s tidak dapat menambahkan kategori '%s' ke agensi %s.", 
+            getName(), category, agencyName));
+        }
 
         // KETERANGAN:
         // 1. Gunakan findOrCreatePreference atau findPreference dari

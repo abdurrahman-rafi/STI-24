@@ -15,6 +15,7 @@ Pengguna Stewart menambahkan kategori 'Badai' untuk agensi Pusat Informasi Cuaca
 Pengguna Otto menambahkan kategori 'Sepak Bola' untuk agensi Pusat Informasi Olahraga dengan metode APP.
 Pengguna Otto menambahkan kategori 'Hujan' untuk agensi Pusat Informasi Cuaca dengan metode EMAIL.
 
+Pengguna Stewart tidak dapat menambahkan kategori 'Politik' ke agensi Jaringan Berita.
 
 Agensi Jaringan Berita menyiarkan pembaruan kategori 'Politik': Liputan debat dijadwalkan malam ini.
 [Stewart] dari Jaringan Berita melalui EMAIL - Politik: Liputan debat dijadwalkan malam ini.
