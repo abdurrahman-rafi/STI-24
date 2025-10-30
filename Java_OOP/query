@@ -1,5 +1,37 @@
-SELECT country_id, c.name FROM regions r, countries c, country_stats s WHERE r.region_id = c.region_id AND c.country_id = s.country_id AND year = 2010 AND gdp > 95000000000 AND r.name = 'Southeast Asia';
+SELECT p.pok_id as ID, p.pok_name as NAME 
+FROM pokemon p JOIN pokemon_types pt ON p.pok_id = pt.pok_id 
+JOIN types t ON t.type_id = pt.type_id 
+WHERE t.type_name IN ('ghost','fairy') AND 
+pok_weight > 200 AND 
+p.pok_id IN (SELECT p.pok_id FROM pokemon p JOIN pokemon_types pt ON p.pok_id = pt.pok_id WHERE slot = 2);
 
-Tampilkan nama negara beserta populasinya pada tahun 2006, dengan syarat populasi lebih dari 10.000.000 jiwa, serta memiliki hari kemerdekaan mulai tahun 1980. Hasil ditampilkan secara berurutan sesuai abjad nama negara.
+SELECT DISTINCT a.abil_name as ABILITY
+FROM pokemon_abilities pa
+WHERE pa.is_hidden = 0 AND
+pa.abil_id IN (SELECT pa.abil_id FROM pokemon_abilities pa JOIN base_stats bst on pa.pok_id = bst.pok_id
+WHERE bst.b_hp > 100 AND bst.b_speed BETWEEN 80 AND 130);
 
-SELECT c.name, s.population FROM countries c, country_stats s WHERE year = 2006 AND c.country_id = s.country_id AND population > 10000000 AND national_day like '1980%' ORDER by c.name;  
+WITH damage(move_id, damage_class) as (
+    SELECT move_id, CASE
+    WHEN move_power * move_pp * move_accuracy > 100000 THEN "High Damage"
+    WHEN move_power * move_pp * move_accuracy BETWEEN 50000 AND 100000 THEN "Medium Damage"
+    WHEN move_power * move_pp * move_accuracy < 50000 THEN "Low Damage"
+    END
+    FROM moves
+    WHERE move_power is NOT NULL
+    AND move_pp is NOT NULL
+    AND move_accuracy is NOT NULL
+)
+SELECT m.move_name, m.move_power, m.move_pp, m.move_accuracy, d.damage_class
+FROM damage d JOIN moves m ON d.move_id = m.move_id;
+
+CREATE VIEW pokemon_move_type as 
+SELECT m.move_name, COUNT(p.pok_id), AVG(bst.b_hp)
+FROM pokemon_moves p JOIN moves m USING move_id 
+JOIN base_stats bst USING pok_id
+GROUP BY m.move_id, p.pok_id
+HAVING COUNT(p.pok_id) > 97
+
+printf((cond1) ... )
+
+x = (cond) ? : 
