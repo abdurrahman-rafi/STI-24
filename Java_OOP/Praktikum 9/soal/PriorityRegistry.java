@@ -11,6 +11,7 @@ public class PriorityRegistry {
        Tidak ada nilai kembalian. */
     public void addPriority(Patient p) {
         // Type your code
+        prioritySet.add(p);
     }
 
     /* TODO : Lengkapi method removePriority(String name)
@@ -19,7 +20,11 @@ public class PriorityRegistry {
        Return: true jika berhasil dihapus, false jika tidak ditemukan.
        Kompleksitas: O(log n) untuk pencarian di TreeSet. */
     public boolean removePriority(String name) {
-        // Type your code
+        for(Patient p : prioritySet){
+            if(p.getName().equalsIgnoreCase(name)){
+                return prioritySet.remove(p);
+            }
+        }
         return false;
     }
 
@@ -35,5 +40,13 @@ public class PriorityRegistry {
        */
     public void displayPriorityList() {
         // Type your code
+        System.out.println("Priority Patients:");
+        if(prioritySet.isEmpty()){
+            System.out.println("- (empty)");
+        }else{
+            for(Patient p : prioritySet){
+                System.out.println("- " + p);
+            }
+        }
     }
 }

@@ -1,6 +1,4 @@
-import java.util.LinkedList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class PatientHistory {
     private List<Patient> history = new LinkedList<>();
@@ -12,6 +10,7 @@ public class PatientHistory {
        Tidak ada nilai kembalian. */
     public void addRecord(Patient p) {
         // Type your code
+        history.add(p);
     }
 
     /* TODO : Lengkapi method sortByName()
@@ -21,6 +20,7 @@ public class PatientHistory {
        Tidak ada nilai kembalian. */
     public void sortByName() {
         // Type your code
+        history.sort(Comparator.comparing(e -> e.getName(), String.CASE_INSENSITIVE_ORDER));
     }
 
     /* TODO : Lengkapi method searchByName(String name)
@@ -31,6 +31,12 @@ public class PatientHistory {
        Output: Patient atau null. */
     public Patient searchByName(String name) {
         // Type your code
+
+        for(Patient p : history){
+            if(p.getName().equalsIgnoreCase(name)){
+                return p;
+            }
+        }
         return null;
     }
 
@@ -45,5 +51,13 @@ public class PatientHistory {
        Tidak ada nilai kembalian. */
     public void displayHistory() {
         // Type your code
+        System.out.println("Patient History:");
+        if(history.isEmpty()){
+            System.out.println("- (empty)");
+        }else{
+            for(Patient p : history){
+                System.out.println("- " + p);
+            }
+        }
     }
 }

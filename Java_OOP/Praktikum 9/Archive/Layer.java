@@ -7,13 +7,18 @@ public class Layer {
     public Layer(List<Neuron> neurons) {
         // TODO:
         // Inisialisasi atribut neurons menggunakan list neuron dari parameter.
-        this.neurons = null;
+        this.neurons = neurons;
     }
 
     public List<Double> forward(List<Double> inputs) {
         // TODO:
         // Kembalikan sebuah list yang berisi keluaran fungsi computeOutput setiap
         // neuron berdasarkan inputs.
-        return null;
+        List<Double> output = new ArrayList<>();
+
+        for(Neuron n : neurons){
+            output.add(n.computeOutput(inputs));
+        }
+        return output;
     }
 }

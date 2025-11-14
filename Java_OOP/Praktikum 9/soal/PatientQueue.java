@@ -11,6 +11,7 @@ public class PatientQueue {
        Tidak ada nilai kembalian (void). */
     public void addPatient(Patient p) {
         // Type your code
+        queue.add(p);
     }
 
     /* TODO : Lengkapi method serveNext()
@@ -20,8 +21,10 @@ public class PatientQueue {
        Alasan menggunakan Queue: efisien untuk operasi penghapusan elemen pertama (O(1)).
        Return: Patient yang dilayani. */
     public Patient serveNext() {
-        // Type your code
-        return null;
+        if(queue.isEmpty()){
+            return null;
+        }
+        return queue.remove();
     }
 
     /* TODO : Lengkapi method peekNext()
@@ -30,8 +33,10 @@ public class PatientQueue {
        Return: Patient paling depan.
        Alasan: memeriksa siapa yang akan dilayani berikutnya tanpa mengubah antrian. */
     public Patient peekNext() {
-        // Type your code
-        return null;
+        if(queue.isEmpty()){
+            return null;
+        }
+        return queue.peek();
     }
 
     /* TODO : Lengkapi method displayQueue()
@@ -46,13 +51,21 @@ public class PatientQueue {
        Tidak ada nilai kembalian. */
     public void displayQueue() {
         // Type your code
+        System.out.println("Current Queue:");
+        if(queue.isEmpty()){
+            System.out.println("- (empty)");
+        }else{
+            for(Patient p : queue){
+                System.out.println("- " + p);
+            }
+        }
     }
 
     /* TODO : Lengkapi method isEmpty()
        Mengecek apakah antrian kosong.
        Return true jika kosong, false jika tidak. */
     public boolean isEmpty() {
-        // Type your code
-        return false;
+        
+        return queue.isEmpty();
     }
 }
