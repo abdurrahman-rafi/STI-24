@@ -49,8 +49,7 @@ public class SuperCollection {
     public List<Integer> findTopN(int n){
         List<Integer> top = new ArrayList<>(collection);
         top.sort(Collections.reverseOrder());
-        List<Integer> subbed =top.subList(0, Math.min(collection.size(), n));
-        return subbed;
+        return new ArrayList<>(top.subList(0, Math.min(collection.size(), n)));
     }
     // TODO: Buat method runningSum()
     // Return List<Integer> berisi cumulative sum
@@ -62,12 +61,10 @@ public class SuperCollection {
     // - Setiap element dalam result adalah hasil penjumlahan sampai index tersebut
     public List<Integer> runningSum(){
         List<Integer> runSum = new ArrayList<>();
+        int sum = 0;
 
         for(int i = 0 ; i<collection.size(); i++){
-            int sum = 0;
-            for(int j = 0; j<=i; j++){
-                sum += collection.get(j);
-            }
+            sum += collection.get(i);
             runSum.add(sum);
         }
 
@@ -87,29 +84,23 @@ public class SuperCollection {
     // - TreeSet adalah Set yang sorted
     // - Gunakan .addAll untuk menambahkan seluruh elemen dari set ke List hasil kalian
     public List<String> findPairsWithSum(int targetSum){
-        Set<Set<Integer>> pairs = new HashSet<>();
-        Set<String> pairsSort = new TreeSet<>();
-        List<String> pairSum = new ArrayList<>();
-
+        Set<String> pairsSet = new TreeSet<>();
         for(int i = 0; i < collection.size() - 1; i++){
-            
             for(int j = i+1; j<collection.size(); j++){
-                Set<Integer> check = new HashSet<>();
                 int num1 = collection.get(i);
                 int num2 = collection.get(j);
 
-                check.add(num1);
-                check.add(num2);
-                if(!pairs.contains(check) && num1 + num2 == targetSum){
-                    pairs.add(check);
-                    int sum = num1 + num2;
-                    pairsSort.add(num1 + "+" + num2 + "=" + sum);
+                if(num1 + num2 == targetSum){
+                    int smaller = Math.min(num1, num2);
+                    int larger = Math.max(num1,num2);
+
+                    pairsSet.add(smaller + "+" + larger + "=" + (smaller + larger));
                 }
             }
         }
 
-        pairSum.addAll(pairsSort);
-        return pairSum;
+        // pairSum.addAll(pairsSort);
+        return new ArrayList<>(pairsSet);
     }
 
     // TODO: Buat method getMostFrequentElements(int n)
@@ -123,44 +114,31 @@ public class SuperCollection {
     // - Pertimbangkan membuat helper class untuk menyimpan pasangan (value, frequency)
     // - Untuk sorting custom, gunakan Comparator
     public List<Integer> getMostFrequentElements(int n){
-        List<Integer> unique = new ArrayList<>();
-        Map<Integer, Long> freqs = new TreeMap<>();
-        // System.out.println(unique.size());
-        // System.out.println(freqs.size());
-        
-        
+        Map<Integer, Long> freqs = new HashMap<>();
+
         for(Integer i: collection){
-            if(!unique.contains(i)){
-                unique.add(i);
-            }
-            
-            if(freqs.containsKey(i)){
-                long freq = freqs.get(i);
-                freq++;
-                freqs.replace(i, freq);
-            }else{
-                freqs.put(i,1L);
-            }
+            freqs.put(i, freqs.getOrDefault(i, 0L) + 1);
         }
 
-        List<Long> topN = new ArrayList<>();
-        for(Integer i : unique){
-            // System.out.println(i);
-            topN.add(freqs.get(i));
-        }
-        // System.out.println(unique.size());
-        // System.out.println(freqs.size());
-        List<Integer> sorted = new ArrayList<>();
-        int it = 0;
-        while(it < n){
-            Long highestfreq = max(topN);
-            sorted.add(unique.get(topN.indexOf(highestfreq)));
-            unique.remove(unique.get(topN.indexOf(highestfreq)));
-            topN.remove(highestfreq);
-            it++;
+        List<Map.Entry<Integer,Long>> entries = new ArrayList<>(freqs.entrySet());
+
+        entries.sort((a,b) -> {
+            int freqCompare = Long.compare(b.getValue(), a.getValue());
+            if(freqCompare != 0){
+                return freqCompare;
+            }
+
+            return Integer.compare(b.getKey(), a.getKey());
+        });
+
+        List<Integer> result = new ArrayList<>();
+        int limit = Math.min(n, entries.size());
+
+        for(int i = 0; i < limit; i++){
+            result.add(entries.get(i).getKey());
         }
 
-        return sorted;
+        return result;
 
     }
 
